@@ -24,16 +24,16 @@ namespace ConsoleApp1
 
             // Use a recursive function to extract all of the HTML elements
             // List<HtmlNode> elements = GetAllElements(doc.DocumentNode);
-            var elements = doc.DocumentNode.SelectNodes("/*").Where(n=>(n.Name == "p" && 
-                                                                        !string.IsNullOrWhiteSpace(n.InnerText) &&
-                                                                        n.InnerText !="&nbsp;"));
-
+            var previewText = doc.DocumentNode.SelectNodes("/*").Where(n => (n.Name == "p" &&
+                                                                          !string.IsNullOrWhiteSpace(n.InnerText) &&
+                                                                          n.InnerText != "&nbsp;")).Select(node=>node.InnerText).FirstOrDefault();
+            Console.WriteLine(previewText);
             // Print out all of the HTML elements
-            foreach (HtmlNode element in elements)
-            {
-                Console.WriteLine(element.Name + " :: ");
-                Console.WriteLine(element.InnerHtml);
-            }
+            // foreach (HtmlNode element in elements)
+            // {
+            //     Console.WriteLine(element.Name + " :: ");
+            //     Console.WriteLine(element.InnerHtml);
+            // }
         }
 
         static List<HtmlNode> GetAllElements(HtmlNode node)
