@@ -9,7 +9,14 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             // Sample HTML code to parse
-            string html = @"<p>Hello World!</p><p><br data-cke-filler=""true""></p>";
+            string html = @"<p>&nbsp;</p>
+<p><br data-cke-filler=""true""></p>
+                <h3>&nbsp;</h3>
+                <h3>Davam H1</h3>
+                <h4>Pak H2</h4>
+                <p>Zde je novy Title pro dFw v2</p>
+                <ol><li>one</li><li>two</li><li>three</li></ol>
+                ";
 
             // Use HtmlAgilityPack to parse the HTML
             HtmlDocument doc = new HtmlDocument();
@@ -17,7 +24,9 @@ namespace ConsoleApp1
 
             // Use a recursive function to extract all of the HTML elements
             // List<HtmlNode> elements = GetAllElements(doc.DocumentNode);
-            var elements = doc.DocumentNode.SelectNodes("/*").Where(n=>!string.IsNullOrWhiteSpace(n.InnerText));
+            var elements = doc.DocumentNode.SelectNodes("/*").Where(n=>(n.Name == "p" && 
+                                                                        !string.IsNullOrWhiteSpace(n.InnerText) &&
+                                                                        n.InnerText !="&nbsp;"));
 
             // Print out all of the HTML elements
             foreach (HtmlNode element in elements)
